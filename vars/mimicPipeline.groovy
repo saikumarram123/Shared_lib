@@ -9,13 +9,13 @@ def call(Map pipelineParams) {
                 sh './gradlew clean'
 
                 echo 'Compile pipelineParams.app'
-                sh "./gradlew :${pipelineParams.app}:build"
+                sh "./gradlew :${pipelineParams.app}:compileJava :${pipelineParams.app}:compileTestJava --stacktrace"
                 
                 echo 'Compile pipelineParams.base'
-                sh "./gradlew :${pipelineParams.base}:build"
+                sh "./gradlew :${pipelineParams.base}:compileJava :${pipelineParams.base}:compileTestJava --stacktrace"
                 
                 echo 'Compile pipelineParams.common'
-                sh "./gradlew :${pipelineParams.common}:build"
+                sh "./gradlew :${pipelineParams.common}:compileJava :${pipelineParams.common}:compileTestJava --stacktrace"
                 
             }
         }
