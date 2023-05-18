@@ -32,6 +32,17 @@ def call(Map pipelineParams) {
                sh "./gradlew cleanTest ${pipelineParams.common}:test --stacktrace"    
                 }
             }
+        stage('Sonarqube') {
+            when { expression { BRANCH_NAME ==~ /(develop|master)/ } }
+            steps {
+                echo 'Analyzing code'
+                withSonarQubeEnv('SonarQube Scanner') {
+                    sh './gradlew --info sonarqube'
+                }
+                
+            }
+        }            
+            
 }
 }
 }
